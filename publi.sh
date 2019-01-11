@@ -1,3 +1,6 @@
+rm .nbinteract.json
+nbinteract init
+
 nbinteract American-predictions-visualisations.ipynb
 
 git add -A
