@@ -11855,12 +11855,77 @@ div#notebook {
 </div>
 
   </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Graphics">Graphics<a class="anchor-link" href="#Graphics">&#182;</a></h2>
+
+  
+
+  <div class="nbinteract-hide_in
+      cell border-box-sizing code_cell rendered">
+    <div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#HIDDEN</span>
+<span class="n">pred_names</span> <span class="o">=</span> <span class="p">[</span>
+<span class="s1">&#39;predictions_American_1_month_sample_weights_100000_2017-01_2018-11_v2.csv&#39;</span><span class="p">,</span>
+<span class="s1">&#39;predictions_American_1_month_sample_weights_400000_2017-01_2018-11_v2.csv&#39;</span><span class="p">,</span>
+<span class="s1">&#39;predictions_American_fit_3_months_sample_weights_100000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
+<span class="s1">&#39;predictions_American_fit_3_months_sample_weights_400000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
+<span class="s1">&#39;predictions_American_fit_generator_1_month_100000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
+<span class="s1">&#39;predictions_American_fit_generator_1_month_sample_weights_100000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
+<span class="s1">&#39;predictions_American_fit_generator_3_months_100000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
+<span class="s1">&#39;predictions_American_fit_generator_3_months_sample_weights_100000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
+<span class="c1"># &#39;predictions_RNN_reg_1_months_sample_weights_100000_2016-12_2018-12.csv&#39;,</span>
+<span class="s1">&#39;predictions_RNN_reg_3_months_sample_weights_100000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
+<span class="s1">&#39;predictions_RNN_reg_fit_generator_1_month_2016-12_2018-11.csv&#39;</span><span class="p">,</span>
+<span class="c1"># &#39;predictions_RNN_reg_fit_generator_1_months_sample_weights_100000_2016-12_2018-12.csv&#39;,</span>
+<span class="s1">&#39;predictions_RNN_reg_fit_generator_1_months_sample_weights_400000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
+<span class="c1"># &#39;predictions_RNN_reg_fit_generator_3_months_2016-12_2018-11.csv&#39;,</span>
+<span class="s1">&#39;predictions_RNN_reg_fit_generator_3_months_sample_weights_100000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
+<span class="s1">&#39;predictions_RNN_reg_fit_generator_3_months_sample_weights_400000_2016-12_2018-12.csv&#39;</span>
+<span class="p">]</span>
+<span class="c1"># 9, 12, 14</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
+
+  </div>
+
+  
+
+  <div class="nbinteract-hide_in
+      cell border-box-sizing code_cell rendered">
+    <div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#HIDDEN</span>
+<span class="kn">import</span> <span class="nn">re</span> 
+<span class="n">ciffre_map</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;RNN_reg&#39;</span><span class="p">:</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;American&#39;</span><span class="p">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;fit_generator|fit&#39;</span><span class="p">:</span><span class="s1">&#39;F&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;sample_weights_&#39;</span><span class="p">:</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_months|_month&#39;</span><span class="p">:</span><span class="s1">&#39;M&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_20.+&#39;</span><span class="p">:</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;predictions_&#39;</span><span class="p">:</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;00000&#39;</span><span class="p">:</span><span class="s1">&#39;&#39;</span> <span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">ciffre</span><span class="p">(</span><span class="n">pred_name</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">ciffre_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">pred_name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">pred_name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pred_name</span>
+
+<span class="c1"># for pred_name in pred_names:</span>
+<span class="c1">#     print(ciffre(pred_name))</span>
+</pre></div>
+
+    </div>
 </div>
+</div>
+
+  </div>
 
   
 
@@ -11876,10 +11941,10 @@ div#notebook {
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">gridspec</span>
 <span class="k">def</span> <span class="nf">create_widget_with_predictions</span><span class="p">(</span><span class="n">preds_name</span><span class="p">):</span>
 
-    <span class="n">preds</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">preds_name</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">preds</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;predictions/&#39;</span><span class="o">+</span><span class="n">preds_name</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">preds</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">preds</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 
-    <span class="nd">@interact_manual</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="s1">&#39;2017-11-10&#39;</span><span class="p">,</span> <span class="n">hours</span><span class="o">=</span><span class="s1">&#39;3&#39;</span><span class="p">)</span>
+    <span class="nd">@interact_manual</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="s1">&#39;2017-11-13&#39;</span><span class="p">,</span> <span class="n">hours</span><span class="o">=</span><span class="s1">&#39;12&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">plot_reg</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">hours</span><span class="p">):</span>
         <span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
         <span class="n">f</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">hours</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">hours</span><span class="p">))</span>
@@ -11897,7 +11962,7 @@ div#notebook {
         <span class="c1"># the fisrt subplot</span>
         <span class="n">ax0</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="n">line0</span> <span class="o">=</span> <span class="n">ax0</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x_1</span><span class="p">,</span> <span class="n">y_1</span><span class="p">,</span>  <span class="n">width</span> <span class="o">=</span> <span class="mf">0.0025</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Prediction&#39;</span><span class="p">)</span>
-        <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">preds_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_v2&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">ciffre</span><span class="p">(</span><span class="n">preds_name</span><span class="p">)</span>
         
         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -11929,41 +11994,12 @@ div#notebook {
 </div>
 
   </div>
-
-  
-
-  <div class="nbinteract-hide_in
-      cell border-box-sizing code_cell rendered">
-    <div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#HIDDEN</span>
-<span class="n">pred_names</span> <span class="o">=</span> <span class="p">[</span>
-<span class="s1">&#39;predictions_American_1_month_sample_weights_100000_2017-01_2018-11_v2.csv&#39;</span><span class="p">,</span>
-<span class="s1">&#39;predictions_American_1_month_sample_weights_400000_2017-01_2018-11_v2.csv&#39;</span><span class="p">,</span>
-<span class="s1">&#39;predictions_American_fit_3_months_sample_weights_100000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
-<span class="s1">&#39;predictions_American_fit_3_months_sample_weights_400000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
-<span class="s1">&#39;predictions_American_fit_generator_1_month_100000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
-<span class="s1">&#39;predictions_American_fit_generator_1_month_sample_weights_100000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
-<span class="s1">&#39;predictions_American_fit_generator_3_months_100000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
-<span class="s1">&#39;predictions_American_fit_generator_3_months_sample_weights_100000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
-<span class="s1">&#39;predictions_RNN_reg_1_months_sample_weights_100000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
-<span class="s1">&#39;predictions_RNN_reg_3_months_sample_weights_100000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
-<span class="s1">&#39;predictions_RNN_reg_fit_generator_1_month_2016-12_2018-11.csv&#39;</span><span class="p">,</span>
-<span class="s1">&#39;predictions_RNN_reg_fit_generator_1_months_sample_weights_100000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
-<span class="s1">&#39;predictions_RNN_reg_fit_generator_1_months_sample_weights_400000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
-<span class="s1">&#39;predictions_RNN_reg_fit_generator_3_months_2016-12_2018-11.csv&#39;</span><span class="p">,</span>
-<span class="s1">&#39;predictions_RNN_reg_fit_generator_3_months_sample_weights_100000_2016-12_2018-12.csv&#39;</span><span class="p">,</span>
-<span class="s1">&#39;predictions_RNN_reg_fit_generator_3_months_sample_weights_400000_2016-12_2018-12.csv&#39;</span>
-<span class="p">]</span>
-</pre></div>
-
-    </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Graphics">Graphics<a class="anchor-link" href="#Graphics">&#182;</a></h2>
 </div>
 </div>
-
-  </div>
+</div>
 
   
 
@@ -11975,7 +12011,7 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#HIDDEN</span>
 <span class="k">for</span> <span class="n">pred_name</span> <span class="ow">in</span> <span class="n">pred_names</span><span class="p">:</span>
-    <span class="n">create_widget_with_predictions</span><span class="p">(</span><span class="s1">&#39;predictions/&#39;</span><span class="o">+</span><span class="n">pred_name</span><span class="p">)</span>
+    <span class="n">create_widget_with_predictions</span><span class="p">(</span><span class="n">pred_name</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -11985,48 +12021,6 @@ div#notebook {
 <div class="output_wrapper">
 <div class="output">
 
-
-<div class="output_area">
-
-    
-
-
-
-  <div class="output_subarea output_widget_view ">
-    <button class="js-nbinteract-widget">
-      Loading widgets...
-    </button>
-  </div>
-
-</div>
-
-<div class="output_area">
-
-    
-
-
-
-  <div class="output_subarea output_widget_view ">
-    <button class="js-nbinteract-widget">
-      Loading widgets...
-    </button>
-  </div>
-
-</div>
-
-<div class="output_area">
-
-    
-
-
-
-  <div class="output_subarea output_widget_view ">
-    <button class="js-nbinteract-widget">
-      Loading widgets...
-    </button>
-  </div>
-
-</div>
 
 <div class="output_area">
 
